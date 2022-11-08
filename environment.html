@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Radio Button</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>Select your size:</p>
+    <input type = "radio" name = "size", value = "fossil_by_country", id="fossil_by_country", checked>
+        <label> fossil_by_country</label>
+    </input>
+    <div id="group">
+    </div>
+
+    <p id="output"></p>
+
+    <div id="fossil_by_country_iframe" style="display:block">
+        <h1>fossil_by_country</h1>
+        <iframe width="100%" height="749" frameborder="0"
+        src="https://observablehq.com/embed/bdfd8fdfc96c4d33?cells=viewof+replay%2Cchart"></iframe>  
+    </div>
+
+    <div id="GHG_by_country_iframe" style="display:none">
+        <h1>GHG_by_country</h1>
+        <iframe width="100%" height="748" frameborder="0"
+        src="https://observablehq.com/embed/d1f27035c63ef2f2?cells=viewof+replay%2Cchart"></iframe>
+    </div>
+
+    <script>
+        const sizes = [ 'GHG_by_country', 'M', 'L', 'XL', 'XXL'];
+      
+        const group = document.querySelector("#group");
+        group.innerHTML = sizes.map((size) => `<div>
+                <input type="radio" name="size" value="${size}" id="${size}">
+                 <label for="${size}">${size}</label>
+            </div>`).join(' ');
+        
+        const radioButtons = document.querySelectorAll('input[name="size"]');
+        for(const radioButton of radioButtons){
+            radioButton.addEventListener('change', showSelected);
+        }        
+        
+        function showSelected(e) {
+            console.log(this.value)
+            if (this.checked && this.value=="fossil_by_country") {
+                document.getElementById("fossil_by_country_iframe").style.display = "block";
+            } else{
+                document.getElementById("fossil_by_country_iframe").style.display = "none";
+    
+            }
+
+
+            if (this.checked && this.value=="GHG_by_country"){
+                document.getElementById("GHG_by_country_iframe").style.display = "block";
+            }else{
+                document.getElementById("GHG_by_country_iframe").style.display = "none";
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
